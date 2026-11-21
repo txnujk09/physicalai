@@ -19,7 +19,7 @@ COND_TEXT = {"impulse": "cube knocked", "slip": "grasp forced open", "target": "
 def make_cam(mujoco):
     cam = mujoco.MjvCamera()
     cam.lookat[:] = [0, 0, 0.04]
-    cam.distance, cam.elevation, cam.azimuth = 0.75, -32, 120
+    cam.distance, cam.elevation, cam.azimuth = 0.62, -30, 120
     return cam
 
 
@@ -39,7 +39,9 @@ def video(args):
     os.environ.setdefault("MUJOCO_GL", "egl")
     import mujoco
     import imageio
-    from PIL import Image, ImageDraw
+    from PIL import Image, ImageDraw, ImageFont
+    font = ImageFont.load_default(size=17)
+    small = ImageFont.load_default(size=14)
     from env import MurphyEnv
     from chaos import Perturbation
     from train import TorchPolicy
@@ -47,7 +49,7 @@ def video(args):
     seed = args.seed
     if seed is None:
         seed, found = pick_seed(args.results, args.perturb)
-        print(f"seed {seed}: " + ("first eval seed where B succeeds and A fails (selected, not typical)"
+        print(f"seed {seed}: " + ("first eval seed where B succeeds and A fails (selected as an illustrative case)"
                                    if found else "no B-wins-A-fails seed found; using first eval seed"))
     H, W = 360, 480
     sides = []
@@ -79,16 +81,16 @@ def video(args):
             im = Image.fromarray(img)
             d = ImageDraw.Draw(im)
             title = "A: trained on clean demos" if name == "A" else "B: clean + chaos recovery demos"
-            d.rectangle([0, 0, W, 44], fill=(20, 20, 20))
-            d.text((8, 5), title, fill=(255, 255, 255))
+            d.rectangle([0, 0, W, 46], fill=(20, 20, 20))
+            d.text((8, 4), title, fill=(255, 255, 255), font=font)
             status = f"step {t}"
             if fired is not None and t >= fired:
                 status += f"   PERTURBATION @ {fired}: {COND_TEXT[args.perturb]}"
-            d.text((8, 24), status, fill=(255, 210, 80) if fired is not None and t >= fired else (200, 200, 200))
+            d.text((8, 25), status, font=small, fill=(255, 210, 80) if fired is not None and t >= fired else (200, 200, 200))
             if i >= len(frames) - 1:
                 txt, col = (f"SUCCESS at step {T}", (40, 200, 90)) if success else (f"FAILED (timeout {T})", (230, 60, 60))
                 d.rectangle([0, H - 40, W, H], fill=(20, 20, 20))
-                d.text((8, H - 30), txt, fill=col)
+                d.text((8, H - 30), txt, fill=col, font=font)
             panels.append(np.asarray(im))
         out.append(np.concatenate(panels, axis=1))
     out += [out[-1]] * 40   # hold final frame
@@ -152,4 +154,7 @@ if __name__ == "__main__":
     p.add_argument("--fps", type=int, default=30)
     p.add_argument("--out", default=None)
     args = p.parse_args()
-    video(args) if args.mode == "video" else live(args)
+    try:
+        video(args) if args.mode == "video" else live(args)
+    except KeyboardInterrupt:
+        pass

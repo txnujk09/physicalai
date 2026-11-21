@@ -1,0 +1,4 @@
+[A] datasets ['clean']: 2000 episodes, 221420 train rows, 11878 val rows
+[A] step   4000  train mse 0.0010  val mse 0.0009  (49s)
+[A] step   8000  train mse 0.0005  val mse 0.0007  (124s)
+[A] step  12000  train mse 0.0002  val mse 0.0003  (197s)
