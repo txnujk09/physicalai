@@ -1,0 +1,18 @@
+[A] datasets ['clean']: 2000 episodes, 221637 train rows, 11661 val rows
+[A] step   4000  train mse 0.0008  val mse 0.0010  (15s)
+[A] step   8000  train mse 0.0003  val mse 0.0005  (30s)
+[A] step  12000  train mse 0.0004  val mse 0.0004  (45s)
+[A] step  16000  train mse 0.0001  val mse 0.0002  (70s)
+[A] step  20000  train mse 0.0001  val mse 0.0002  (85s)
+[B] datasets ['clean', 'chaos']: 3942 episodes, 454741 train rows, 24643 val rows
+[B] step   4000  train mse 0.0059  val mse 0.0072  (14s)
+[B] step   8000  train mse 0.0023  val mse 0.0046  (41s)
+[B] step  12000  train mse 0.0025  val mse 0.0036  (56s)
+[B] step  16000  train mse 0.0004  val mse 0.0027  (70s)
+[B] step  20000  train mse 0.0007  val mse 0.0026  (83s)
+[Aplus] datasets ['clean', 'clean_extra']: 4000 episodes, 442666 train rows, 23315 val rows
+[Aplus] step   4000  train mse 0.0013  val mse 0.0010  (14s)
+[Aplus] step   8000  train mse 0.0004  val mse 0.0006  (27s)
+[Aplus] step  12000  train mse 0.0004  val mse 0.0003  (42s)
+[Aplus] step  16000  train mse 0.0001  val mse 0.0002  (56s)
+[Aplus] step  20000  train mse 0.0001  val mse 0.0002  (71s)
