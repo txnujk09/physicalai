@@ -6,6 +6,7 @@ from env import MurphyEnv, CUBE_H, MAX_D
 
 SAFE_Z = 0.10      # travel height (hand z)
 GRASP_Z = CUBE_H   # hand z when fingers straddle a resting cube
+CARRY_SPEED = 0.4  # action cap while holding the cube
 OPEN_OK = 0.07     # opening considered "open"
 PHASES = ["approach", "descend", "grasp", "lift", "move", "lower", "release"]
 
@@ -47,6 +48,8 @@ def phase_and_action(o, gain=1.0):
         else:
             phase, goal, grip = "descend", np.array([c[0], c[1], max(c[2], GRASP_Z)]), -1.0
     a = np.clip(gain * (goal - h) / MAX_D, -1, 1)
+    if grasped:   # carry gently so a slippery grasp survives the acceleration
+        a = np.clip(a, -CARRY_SPEED, CARRY_SPEED)
     return phase, np.array([*a, grip], dtype=np.float32)
 
 
