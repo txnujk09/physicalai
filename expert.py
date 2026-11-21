@@ -69,7 +69,8 @@ def run_episode(env, seed, policy=None, perturb=None, record=False):
         a = np.asarray(policy(o), dtype=np.float32)
         a_exec = perturb.pre_step(env, a) if perturb is not None else a
         if record:
-            rows.append((env.t, o.copy(), a.copy()))
+            rec = perturb.in_recovery(env.t) if perturb is not None else False
+            rows.append((env.t, o.copy(), a.copy(), rec))
         o, r, done, info = env.step(a_exec)
     return {"success": bool(info["success"]), "steps": info["t"], "rows": rows}
 
