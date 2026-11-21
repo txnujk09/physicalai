@@ -1,0 +1,504 @@
+{
+ "settings": {
+  "folds": 5,
+  "target_fa": 0.1,
+  "seed": 0
+ },
+ "results": {
+  "minus70": {
+   "hit_rate": 0.5263157894736842,
+   "hits": 10,
+   "n_faults": 19,
+   "false_alarm_rate": 0.1036,
+   "n_healthy": 2500,
+   "auc": 0.8025052631578946,
+   "auc_ci95": [
+    0.6782731578947369,
+    0.906408947368421
+   ]
+  },
+  "z_rule": {
+   "hit_rate": 0.47368421052631576,
+   "hits": 9,
+   "n_faults": 19,
+   "false_alarm_rate": 0.1008,
+   "n_healthy": 2500,
+   "auc": 0.7315578947368421,
+   "auc_ci95": [
+    0.5837842105263158,
+    0.8610594736842103
+   ],
+   "earlier_than_minus70_days": [
+    -1.0999999999999999,
+    -1.2000000000000002,
+    7.700000000000001,
+    -1.1999999999999993,
+    -1.3999999999999995,
+    18.400000000000002,
+    3.4999999999999996,
+    11.9
+   ],
+   "alarms_where_minus70_silent": 1
+  },
+  "sim_model": {
+   "hit_rate": 0.5263157894736842,
+   "hits": 10,
+   "n_faults": 19,
+   "false_alarm_rate": 0.1008,
+   "n_healthy": 2500,
+   "auc": 0.7374526315789474,
+   "auc_ci95": [
+    0.5865157894736842,
+    0.8845636842105261
+   ],
+   "earlier_than_minus70_days": [
+    -0.2999999999999998,
+    -1.0,
+    -0.40000000000000036,
+    -1.0,
+    -1.0999999999999996,
+    -0.7,
+    3.4999999999999996,
+    11.9
+   ],
+   "alarms_where_minus70_silent": 2
+  },
+  "hybrid": {
+   "hit_rate": 0.0,
+   "hits": 0,
+   "n_faults": 19,
+   "false_alarm_rate": 0.116,
+   "n_healthy": 2500,
+   "auc": 0.5891578947368421,
+   "auc_ci95": [
+    0.4774705263157895,
+    0.6982257894736842
+   ],
+   "earlier_than_minus70_days": [],
+   "alarms_where_minus70_silent": 0
+  }
+ },
+ "faults": [
+  {
+   "freezer": 806017,
+   "date": "2015-02-13",
+   "category": "2nd stage compressor",
+   "target": "comp2",
+   "fold": 0,
+   "scores": {
+    "minus70": 23.358333333333334,
+    "z_rule": 1166.4996060606059,
+    "sim_model": 0.9998993288811407,
+    "hybrid": 0.00170676840779439
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 2.8,
+    "z_rule": 1.7,
+    "sim_model": 2.5
+   }
+  },
+  {
+   "freezer": 806018,
+   "date": "2022-10-04",
+   "category": "Refrigerant leakage",
+   "target": "leak",
+   "fold": 4,
+   "scores": {
+    "minus70": -76.36166666666666,
+    "z_rule": 39.73633248685275,
+    "sim_model": 0.9931432860203616,
+    "hybrid": 0.008242093224220953
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "z_rule": 1.7,
+    "sim_model": 1.9
+   }
+  },
+  {
+   "freezer": 806024,
+   "date": "2015-11-04",
+   "category": "2nd stage compressor",
+   "target": "comp2",
+   "fold": 0,
+   "scores": {
+    "minus70": -78.79333333333331,
+    "z_rule": 1.645792323481187,
+    "sim_model": 0.00913764060465394,
+    "hybrid": 0.0025577964685792494
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": null
+  },
+  {
+   "freezer": 806026,
+   "date": "2022-07-19",
+   "category": "2nd stage compressor",
+   "target": "comp2",
+   "fold": 4,
+   "scores": {
+    "minus70": -32.606249999999996,
+    "z_rule": 6.955241122331898,
+    "sim_model": 0.36161662054011323,
+    "hybrid": 0.002045990470784569
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 0.4
+   }
+  },
+  {
+   "freezer": 806026,
+   "date": "2016-06-09",
+   "category": "2nd stage compressor",
+   "target": "comp2",
+   "fold": 4,
+   "scores": {
+    "minus70": 27.35789473684211,
+    "z_rule": 730.7413573027583,
+    "sim_model": 0.9997742799314141,
+    "hybrid": 0.0005196351363807578
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 6.4,
+    "z_rule": 5.2,
+    "sim_model": 5.4
+   }
+  },
+  {
+   "freezer": 806031,
+   "date": "2023-02-03",
+   "category": "Bad insulation",
+   "target": "door",
+   "fold": 4,
+   "scores": {
+    "minus70": -79.06166666666667,
+    "z_rule": 0.5425572147378659,
+    "sim_model": 0.002882096681518953,
+    "hybrid": 0.00036997883851096636
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": null
+  },
+  {
+   "freezer": 806265,
+   "date": "2022-09-21",
+   "category": "Door tightness",
+   "target": "door",
+   "fold": 0,
+   "scores": {
+    "minus70": -71.95833333333331,
+    "z_rule": 19.988972222222223,
+    "sim_model": 0.9857605351338463,
+    "hybrid": 0.002448185645697474
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "sim_model": 26.9
+   }
+  },
+  {
+   "freezer": 806272,
+   "date": "2015-03-03",
+   "category": "1st stage compressor",
+   "target": "comp1",
+   "fold": 4,
+   "scores": {
+    "minus70": -55.430000000000014,
+    "z_rule": 12.914190570159676,
+    "sim_model": 0.7906473106743037,
+    "hybrid": 0.0025998006757935203
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 0.3
+   }
+  },
+  {
+   "freezer": 806276,
+   "date": "2015-03-17",
+   "category": "Refrigerant leakage",
+   "target": "leak",
+   "fold": 3,
+   "scores": {
+    "minus70": 25.675,
+    "z_rule": 2104.8126111111114,
+    "sim_model": 0.9999910504386126,
+    "hybrid": 0.0031568427740515906
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 12.9,
+    "z_rule": 20.6,
+    "sim_model": 12.5
+   }
+  },
+  {
+   "freezer": 806276,
+   "date": "2015-07-09",
+   "category": "Door tightness",
+   "target": "door",
+   "fold": 3,
+   "scores": {
+    "minus70": -71.33833333333332,
+    "z_rule": 3.2608608703251445,
+    "sim_model": 0.6193167004682927,
+    "hybrid": 0.001648895398069368
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": null
+  },
+  {
+   "freezer": 806276,
+   "date": "2016-12-16",
+   "category": "1st stage compressor (No fix)",
+   "target": "comp1",
+   "fold": 3,
+   "scores": {
+    "minus70": -79.73499999999999,
+    "z_rule": 1.6826832046598033,
+    "sim_model": 0.041827676884946485,
+    "hybrid": 0.0026243630031490424
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": null
+  },
+  {
+   "freezer": 806276,
+   "date": "2017-09-20",
+   "category": "1st stage compressor",
+   "target": "comp1",
+   "fold": 3,
+   "scores": {
+    "minus70": -79.09833333333334,
+    "z_rule": 1.7133333333333312,
+    "sim_model": 0.002213849222348907,
+    "hybrid": 0.0002555140461510526
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": null
+  },
+  {
+   "freezer": 806276,
+   "date": "2022-10-25",
+   "category": "1st stage compressor",
+   "target": "comp1",
+   "fold": 3,
+   "scores": {
+    "minus70": -21.335,
+    "z_rule": 89.45909603759495,
+    "sim_model": 0.9991054882256053,
+    "hybrid": 4.653228258598263e-05
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 21.8,
+    "z_rule": 20.6,
+    "sim_model": 20.8
+   }
+  },
+  {
+   "freezer": 806277,
+   "date": "2023-04-12",
+   "category": "Refrigerant leakage",
+   "target": "leak",
+   "fold": 4,
+   "scores": {
+    "minus70": 25.71,
+    "z_rule": 681.5766065815417,
+    "sim_model": 0.9999900026847078,
+    "hybrid": 0.00010736625787518648
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 7.6,
+    "z_rule": 6.2,
+    "sim_model": 6.5
+   }
+  },
+  {
+   "freezer": 806278,
+   "date": "2022-04-19",
+   "category": "Refrigerant leakage",
+   "target": "leak",
+   "fold": 1,
+   "scores": {
+    "minus70": -37.27166666666667,
+    "z_rule": 382.1716666666663,
+    "sim_model": 0.9999899524296714,
+    "hybrid": 0.0014258353163474082
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 2.4,
+    "z_rule": 20.8,
+    "sim_model": 1.7
+   }
+  },
+  {
+   "freezer": 806279,
+   "date": "2017-03-15",
+   "category": "1st stage compressor",
+   "target": "comp1",
+   "fold": 4,
+   "scores": {
+    "minus70": -68.945,
+    "z_rule": 2.7975444246119463,
+    "sim_model": 0.023519328282944785,
+    "hybrid": 0.00041615484661726996
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": null
+  },
+  {
+   "freezer": 806279,
+   "date": "2022-06-28",
+   "category": "Refrigerant leakage",
+   "target": "leak",
+   "fold": 4,
+   "scores": {
+    "minus70": 21.400000000000002,
+    "z_rule": 1153.751067354168,
+    "sim_model": 0.9999797219189721,
+    "hybrid": 9.227964258263951e-05
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 1.1,
+    "z_rule": 4.6,
+    "sim_model": 4.6
+   }
+  },
+  {
+   "freezer": 806282,
+   "date": "2023-04-12",
+   "category": "Refrigerant leakage",
+   "target": "leak",
+   "fold": 1,
+   "scores": {
+    "minus70": 25.83333333333334,
+    "z_rule": 1178.036249571927,
+    "sim_model": 0.9999878036922549,
+    "hybrid": 0.003238611152670675
+   },
+   "alarm": {
+    "minus70": true,
+    "z_rule": true,
+    "sim_model": true,
+    "hybrid": false
+   },
+   "days_before": {
+    "minus70": 6.9,
+    "z_rule": 18.8,
+    "sim_model": 18.8
+   }
+  },
+  {
+   "freezer": 808783,
+   "date": "2021-09-14",
+   "category": "Refrigerant leakage",
+   "target": "leak",
+   "fold": 1,
+   "scores": {
+    "minus70": -76.84166666666667,
+    "z_rule": 5.792001063797998,
+    "sim_model": 0.5953845070176804,
+    "hybrid": 0.0006754883232212716
+   },
+   "alarm": {
+    "minus70": false,
+    "z_rule": false,
+    "sim_model": false,
+    "hybrid": false
+   },
+   "days_before": null
+  }
+ ]
+}

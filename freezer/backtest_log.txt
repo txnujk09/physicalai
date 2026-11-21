@@ -1,0 +1,67 @@
+806016: 0 labels, healthy windows so far 78
+806017: 3 labels, healthy windows so far 151
+806018: 4 labels, healthy windows so far 218
+806019: 0 labels, healthy windows so far 297
+806020: 1 labels, healthy windows so far 375
+806021: 0 labels, healthy windows so far 454
+806023: 3 labels, healthy windows so far 466
+806024: 1 labels, healthy windows so far 542
+806026: 3 labels, healthy windows so far 613
+806027: 0 labels, healthy windows so far 692
+806028: 0 labels, healthy windows so far 769
+806029: 1 labels, healthy windows so far 830
+806030: 2 labels, healthy windows so far 904
+806031: 3 labels, healthy windows so far 971
+806033: 2 labels, healthy windows so far 1045
+806034: 0 labels, healthy windows so far 1120
+806265: 1 labels, healthy windows so far 1190
+806267: 0 labels, healthy windows so far 1245
+806268: 0 labels, healthy windows so far 1321
+806269: 2 labels, healthy windows so far 1392
+806270: 0 labels, healthy windows so far 1468
+806271: 0 labels, healthy windows so far 1545
+806272: 1 labels, healthy windows so far 1614
+806273: 1 labels, healthy windows so far 1687
+806274: 1 labels, healthy windows so far 1760
+806275: 0 labels, healthy windows so far 1773
+806276: 5 labels, healthy windows so far 1837
+806277: 3 labels, healthy windows so far 1907
+806278: 1 labels, healthy windows so far 1979
+806279: 3 labels, healthy windows so far 2018
+806280: 0 labels, healthy windows so far 2091
+806281: 1 labels, healthy windows so far 2146
+806282: 1 labels, healthy windows so far 2220
+806283: 1 labels, healthy windows so far 2285
+806829: 0 labels, healthy windows so far 2352
+806830: 0 labels, healthy windows so far 2420
+808301: 1 labels, healthy windows so far 2455
+808783: 1 labels, healthy windows so far 2500
+
+38 freezers | 46 labelled events, 19 usable target faults (leak / compressor / door-insulation) | 2500 healthy 47-day windows
+
+method      alarm before service date  false alarm (healthy)  median lead (d)
+sim_model                   68% (13/19)             24% (609/2500)          5.4
+z_rule                      63% (12/19)             28% (703/2500)         17.8
+minus70                     58% (11/19)             14% (338/2500)          6.4
+
+per fault (target categories):
+  806017 2015-02-13 comp2 sim_model +3d comp1          z_rule +3d      -70C +3d
+  806018 2022-10-04 leak  sim_model +2d leak1          z_rule +2d      -70C -
+  806024 2015-11-04 comp2 sim_model -1d leak1          z_rule -1d      -70C -0d
+  806026 2022-07-19 comp2 sim_model -1d comp2          z_rule +15d     -70C +0d
+  806026 2016-06-09 comp2 sim_model +5d comp2          z_rule +5d      -70C +6d
+  806031 2023-02-03 door  sim_model -                  z_rule -        -70C -
+  806265 2022-09-21 door  sim_model +27d comp2         z_rule +27d     -70C -
+  806272 2015-03-03 comp1 sim_model +0d leak1          z_rule +16d     -70C +1d
+  806276 2015-03-17 leak  sim_model +12d leak1         z_rule +23d     -70C +13d
+  806276 2015-07-09 door  sim_model +0d comp2          z_rule -0d      -70C -
+  806276 2016-12-16 comp1 sim_model -                  z_rule -        -70C -
+  806276 2017-09-20 comp1 sim_model -                  z_rule -        -70C -
+  806276 2022-10-25 comp1 sim_model +21d leak1         z_rule +26d     -70C +22d
+  806277 2023-04-12 leak  sim_model +6d leak1          z_rule +6d      -70C +8d
+  806278 2022-04-19 leak  sim_model +2d leak1          z_rule +24d     -70C +3d
+  806279 2017-03-15 comp1 sim_model -                  z_rule -        -70C +21d
+  806279 2022-06-28 leak  sim_model +20d comp1         z_rule +34d     -70C +1d
+  806282 2023-04-12 leak  sim_model +20d comp2         z_rule +20d     -70C +7d
+  808783 2021-09-14 leak  sim_model +1d comp2          z_rule -1d      -70C -1d
+wrote /home/user/physicalai/freezer/results_real_backtest.json
