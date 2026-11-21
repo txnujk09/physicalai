@@ -1,7 +1,9 @@
 """Demos.
 
   video : side-by-side MP4 of policy A vs policy B on the same seed + perturbation
-  live  : interactive viewer running a policy; drag the cube with the mouse
+  viewer: interactive viewer running a policy, plain python on every OS
+  live  : same idea via the passive viewer (episodes reset; macOS needs mjpython);
+          drag the cube with the mouse
           (double-click the cube to select it, then Ctrl + right-drag to push it,
           Ctrl + left-drag to lift/rotate). On macOS run with `mjpython`.
 """
@@ -101,6 +103,49 @@ def video(args):
     print("wrote", path)
 
 
+def viewer(args):
+    """Blocking MuJoCo viewer driven by a control callback. Works with plain
+    `python` on macOS (no mjpython). The policy acts every N_SUB physics steps.
+    When the cube is placed, the target jumps somewhere new and the policy goes
+    again, so you can keep dragging the cube around indefinitely."""
+    import mujoco
+    import mujoco.viewer
+    from env import MurphyEnv, N_SUB, CUBE_H
+    from train import TorchPolicy
+    from expert import Expert
+    env = MurphyEnv()
+    pol = Expert() if args.policy == "expert" else TorchPolicy(os.path.join(args.models, f"{args.policy}.pt"))
+    seed = args.seed if args.seed is not None else 0
+    env.reset(seed=seed)
+    rng = np.random.default_rng(seed)
+    st = {"k": 0, "placed": 0}
+
+    def control(m, d):
+        if st["k"] % N_SUB == 0:
+            if st["k"] > 0:
+                _, _, _, info = env.post_step()
+                if info["success"]:
+                    st["placed"] += 1
+                    print(f"placed #{st['placed']} at step {env.t}; moving target", flush=True)
+                    c = env.cube_pos()[:2]
+                    while True:
+                        xy = rng.uniform(-0.15, 0.15, 2)
+                        if np.linalg.norm(xy - c) > 0.10:
+                            break
+                    env.set_target(np.array([*xy, CUBE_H]))
+                    env.hold, env.t = 0, 0
+            env.apply_action(pol(env.obs()))
+        st["k"] += 1
+
+    mujoco.set_mjcb_control(control)
+    print(f"viewer: policy {args.policy}. Double-click the cube, then Ctrl+right-drag to shove it. "
+          "Close the window to quit.", flush=True)
+    try:
+        mujoco.viewer.launch(env.model, env.data)
+    finally:
+        mujoco.set_mjcb_control(None)
+
+
 def live(args):
     import mujoco
     import mujoco.viewer
@@ -144,7 +189,9 @@ def live(args):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("mode", choices=["video", "live"])
+    p.add_argument("mode", choices=["video", "live", "viewer"],
+                   help="video: A vs B mp4; live: passive viewer (macOS: needs mjpython); "
+                        "viewer: blocking viewer, works with plain python everywhere")
     p.add_argument("--perturb", default="impulse", choices=list(COND_TEXT))
     p.add_argument("--seed", type=int, default=None)
     p.add_argument("--policy", default="B", help="live mode: A, B, Aplus or expert")
@@ -155,6 +202,6 @@ if __name__ == "__main__":
     p.add_argument("--out", default=None)
     args = p.parse_args()
     try:
-        video(args) if args.mode == "video" else live(args)
+        {"video": video, "live": live, "viewer": viewer}[args.mode](args)
     except KeyboardInterrupt:
         pass

@@ -53,27 +53,29 @@ All scripts have fixed seeds and sensible defaults. Times are on a 4-core CPU.
 | 5 | `.venv/bin/python train.py` | trains A, B, A+ (20k steps, batch 512 each) to `models/` | 5 min |
 | 6 | `.venv/bin/python eval.py` | 200 seeds x 6 conditions x 4 policies, writes `results/` | 80 s |
 | 7a | `.venv/bin/python demo.py video --perturb impulse` | side-by-side A vs B MP4 in `results/` | 40 s |
-| 7b | see below | live viewer, policy B, drag the cube | |
+| 7b | `.venv/bin/python demo.py viewer` | live viewer, policy B, drag the cube | |
 | extra | `.venv/bin/python summarize.py` | markdown results table (incl. extra training seeds) | 1 s |
 | extra | `./loo.sh` | leave-one-out: train B without type X, test on X | 10 min |
 
 Extra training seeds: `.venv/bin/python train.py --seed 1 --out models_seed1` then `.venv/bin/python eval.py --policies A Aplus B --models models_seed1 --out results/seed1`.
 
+### One-command demo (macOS or Linux)
+
+```bash
+./run_demo_mac.sh
+```
+
+That installs uv and the venv if needed, runs a 20-seed A vs B sanity eval on your machine, prints the results table, opens the chart and the side-by-side video, then launches the interactive viewer with policy B. Sub-commands: `setup`, `check`, `show`, `live`, `live A`.
+
 ### Live viewer
 
-macOS (the passive viewer must run under `mjpython`, which ships with the mujoco wheel):
-
 ```bash
-.venv/bin/mjpython demo.py live --policy B
+.venv/bin/python demo.py viewer --policy B
 ```
 
-Linux / Windows:
+This works with plain `python` on macOS, Linux and Windows (no `mjpython` needed). Double-click the cube to select it, then hold Ctrl and right-drag to shove it across the table (Ctrl + left-drag lifts/rotates). The policy re-grasps and places it; each time it succeeds the target jumps somewhere new, so it keeps going until you close the window. Use `--policy A` to watch the clean-only policy get stuck.
 
-```bash
-.venv/bin/python demo.py live --policy B
-```
-
-Double-click the cube to select it, then hold Ctrl and right-drag to shove it across the table (Ctrl + left-drag lifts/rotates). The policy re-grasps and places it; after each success a new episode starts. Add `--chaos` to also inject a random scripted perturbation every episode, or `--policy A` to watch the clean-only policy get stuck.
+The older passive-viewer mode (`demo.py live`, resets episodes, `--chaos` injects scripted perturbations) needs `mjpython` on macOS: `.venv/bin/mjpython demo.py live --policy B --chaos`.
 
 ## Task and interfaces
 
@@ -165,5 +167,5 @@ Recovery skills transfer across failure types: removing a type from training cos
 - The slip perturbation fires once the cube is lifted, so its timing depends on the policy being evaluated (a policy that never lifts the cube is never slipped). All other perturbations fire at the same step for every policy.
 - The scripted expert itself is not perfect under perturbation (friction 89%, noise 93%), and that is the ceiling B is imitating.
 - Demo videos use the first eval seed where B succeeds and A fails. They are illustrative, not typical; the numbers above are the evidence.
-- Mouse dragging in the live viewer was not tested by hand in the build container (headless); the viewer loop itself was run under a virtual display with scripted perturbations.
+- Mouse dragging in the live viewer was not tested by hand in the build container (headless). Both viewer modes were run under a virtual display: `viewer` placed the cube 58 times in a row with a moving target, `live --chaos` recovered from scripted perturbations. Neither has been run on macOS yet.
 - The torch wheel pulled in is a CUDA build, but everything runs on CPU.

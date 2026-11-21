@@ -115,14 +115,22 @@ class MurphyEnv:
         return self.obs()
 
     def step(self, action):
+        self.apply_action(action)
+        for _ in range(N_SUB):
+            mujoco.mj_step(self.model, self.data)
+        return self.post_step()
+
+    def apply_action(self, action):
+        """Write an action into mocap target + finger motors (no physics)."""
         a = np.clip(np.asarray(action, dtype=np.float64), -1, 1)
         hand = self.hand_pos()
         self.mocap = np.clip(self.mocap + a[:3] * MAX_D, WS_LO, WS_HI)
         self.mocap = np.clip(self.mocap, hand - 0.02, hand + 0.02)   # anti wind-up
         self.data.mocap_pos[0] = self.mocap
         self.data.ctrl[:] = -a[3]   # +1 => closing force 4 N per finger
-        for _ in range(N_SUB):
-            mujoco.mj_step(self.model, self.data)
+
+    def post_step(self):
+        """Bookkeeping after N_SUB physics steps."""
         self.t += 1
         ok = self.success_now()
         self.hold = self.hold + 1 if ok else 0
