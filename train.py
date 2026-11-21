@@ -15,6 +15,13 @@ import torch.nn as nn
 from env import OBS_DIM, ACT_DIM
 
 DATASETS = {"A": ["clean"], "B": ["clean", "chaos"], "Aplus": ["clean", "clean_extra"]}
+# leave-one-out: B_no_<type> = clean + chaos without that perturbation type
+for _t in ["impulse", "slip", "target", "friction", "noise"]:
+    DATASETS[f"B_no_{_t}"] = ["clean", "chaos"]
+
+
+def excluded_type(name):
+    return name[5:] if name.startswith("B_no_") else None
 
 
 class MLP(nn.Module):
@@ -41,11 +48,13 @@ class TorchPolicy:
         return self.model(torch.as_tensor(o, dtype=torch.float32)[None])[0].numpy()
 
 
-def load(names, data_dir):
+def load(names, data_dir, exclude=None):
     dfs = []
     for i, n in enumerate(names):
         df = pd.read_parquet(os.path.join(data_dir, f"{n}.parquet"))
         df = df[df.episode_success]
+        if exclude is not None:
+            df = df[df.perturbation_type != exclude]
         df = df.assign(ep_key=df.episode_id + 100_000 * i)
         dfs.append(df)
     df = pd.concat(dfs, ignore_index=True)
@@ -55,7 +64,7 @@ def load(names, data_dir):
 def train(name, args):
     torch.manual_seed(args.seed)
     rng = np.random.default_rng(args.seed)
-    df = load(DATASETS[name], args.data)
+    df = load(DATASETS[name], args.data, excluded_type(name))
     eps = df.ep_key.unique()
     val_eps = set(rng.choice(eps, size=max(1, len(eps) // 20), replace=False))
     is_val = df.ep_key.isin(val_eps).values

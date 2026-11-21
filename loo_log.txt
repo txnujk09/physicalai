@@ -1,0 +1,55 @@
+[B_no_impulse] datasets ['clean', 'chaos']: 3541 episodes, 408568 train rows, 21461 val rows
+[B_no_impulse] step   4000  train mse 0.0029  val mse 0.0072  (14s)
+[B_no_impulse] step   8000  train mse 0.0023  val mse 0.0051  (28s)
+[B_no_impulse] step  12000  train mse 0.0028  val mse 0.0036  (43s)
+[B_no_impulse] step  16000  train mse 0.0020  val mse 0.0029  (57s)
+[B_no_impulse] step  20000  train mse 0.0006  val mse 0.0027  (71s)
+condition          B_no_impulse
+clean                    100.0%
+impulse                   98.0%
+all perturbed             98.0%
+wrote results/loo_impulse/results.json and results/loo_impulse/success_rates.png in 6.7s
+[B_no_slip] datasets ['clean', 'chaos']: 3542 episodes, 400633 train rows, 20562 val rows
+[B_no_slip] step   4000  train mse 0.0019  val mse 0.0061  (13s)
+[B_no_slip] step   8000  train mse 0.0028  val mse 0.0038  (26s)
+[B_no_slip] step  12000  train mse 0.0009  val mse 0.0023  (40s)
+[B_no_slip] step  16000  train mse 0.0021  val mse 0.0019  (54s)
+[B_no_slip] step  20000  train mse 0.0005  val mse 0.0017  (68s)
+condition             B_no_slip
+clean                    100.0%
+slip                      99.5%
+all perturbed             99.5%
+wrote results/loo_slip/results.json and results/loo_slip/success_rates.png in 6.9s
+[B_no_target] datasets ['clean', 'chaos']: 3536 episodes, 412384 train rows, 21791 val rows
+[B_no_target] step   4000  train mse 0.0083  val mse 0.0065  (13s)
+[B_no_target] step   8000  train mse 0.0043  val mse 0.0039  (28s)
+[B_no_target] step  12000  train mse 0.0012  val mse 0.0025  (42s)
+[B_no_target] step  16000  train mse 0.0008  val mse 0.0017  (57s)
+[B_no_target] step  20000  train mse 0.0018  val mse 0.0016  (71s)
+condition           B_no_target
+clean                    100.0%
+target                   100.0%
+all perturbed            100.0%
+wrote results/loo_target/results.json and results/loo_target/success_rates.png in 8.1s
+[B_no_friction] datasets ['clean', 'chaos']: 3586 episodes, 416955 train rows, 21387 val rows
+[B_no_friction] step   4000  train mse 0.0031  val mse 0.0060  (14s)
+[B_no_friction] step   8000  train mse 0.0017  val mse 0.0041  (28s)
+[B_no_friction] step  12000  train mse 0.0011  val mse 0.0028  (42s)
+[B_no_friction] step  16000  train mse 0.0011  val mse 0.0017  (56s)
+[B_no_friction] step  20000  train mse 0.0012  val mse 0.0016  (71s)
+condition         B_no_friction
+clean                    100.0%
+friction                  91.0%
+all perturbed             91.0%
+wrote results/loo_friction/results.json and results/loo_friction/success_rates.png in 8.4s
+[B_no_noise] datasets ['clean', 'chaos']: 3563 episodes, 405134 train rows, 21959 val rows
+[B_no_noise] step   4000  train mse 0.0013  val mse 0.0024  (13s)
+[B_no_noise] step   8000  train mse 0.0013  val mse 0.0016  (26s)
+[B_no_noise] step  12000  train mse 0.0053  val mse 0.0009  (39s)
+[B_no_noise] step  16000  train mse 0.0032  val mse 0.0006  (52s)
+[B_no_noise] step  20000  train mse 0.0006  val mse 0.0006  (65s)
+condition            B_no_noise
+clean                    100.0%
+noise                     70.0%
+all perturbed             70.0%
+wrote results/loo_noise/results.json and results/loo_noise/success_rates.png in 7.7s

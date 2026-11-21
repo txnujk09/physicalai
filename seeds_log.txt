@@ -2,3 +2,55 @@
 [A] step   4000  train mse 0.0010  val mse 0.0009  (49s)
 [A] step   8000  train mse 0.0005  val mse 0.0007  (124s)
 [A] step  12000  train mse 0.0002  val mse 0.0003  (197s)
+[A] step  16000  train mse 0.0002  val mse 0.0002  (212s)
+[A] step  20000  train mse 0.0001  val mse 0.0002  (226s)
+[B] datasets ['clean', 'chaos']: 3942 episodes, 454970 train rows, 24414 val rows
+[B] step   4000  train mse 0.0076  val mse 0.0091  (15s)
+[B] step   8000  train mse 0.0015  val mse 0.0060  (30s)
+[B] step  12000  train mse 0.0023  val mse 0.0039  (44s)
+[B] step  16000  train mse 0.0024  val mse 0.0034  (57s)
+[B] step  20000  train mse 0.0002  val mse 0.0033  (72s)
+[Aplus] datasets ['clean', 'clean_extra']: 4000 episodes, 442898 train rows, 23083 val rows
+[Aplus] step   4000  train mse 0.0010  val mse 0.0011  (13s)
+[Aplus] step   8000  train mse 0.0007  val mse 0.0005  (27s)
+[Aplus] step  12000  train mse 0.0003  val mse 0.0003  (41s)
+[Aplus] step  16000  train mse 0.0002  val mse 0.0002  (55s)
+[Aplus] step  20000  train mse 0.0002  val mse 0.0002  (68s)
+condition                     A           Aplus               B
+clean                     95.0%           99.0%          100.0%
+impulse                   40.0%           56.5%           97.0%
+slip                      26.5%           74.0%           99.5%
+target                    85.5%           90.5%          100.0%
+friction                  64.5%           85.0%           90.5%
+noise                      9.5%           18.5%           89.5%
+all perturbed             45.2%           64.9%           95.3%
+paired (same seed) B succeeds & A fails / A succeeds & B fails: {'clean': (10, 0), 'impulse': (114, 0), 'slip': (146, 0), 'target': (29, 0), 'friction': (52, 0), 'noise': (160, 0)}
+wrote results/seed1/results.json and results/seed1/success_rates.png in 65.7s
+[A] datasets ['clean']: 2000 episodes, 221886 train rows, 11412 val rows
+[A] step   4000  train mse 0.0011  val mse 0.0011  (14s)
+[A] step   8000  train mse 0.0003  val mse 0.0005  (28s)
+[A] step  12000  train mse 0.0002  val mse 0.0003  (42s)
+[A] step  16000  train mse 0.0003  val mse 0.0002  (56s)
+[A] step  20000  train mse 0.0001  val mse 0.0002  (71s)
+[B] datasets ['clean', 'chaos']: 3942 episodes, 455453 train rows, 23931 val rows
+[B] step   4000  train mse 0.0021  val mse 0.0088  (14s)
+[B] step   8000  train mse 0.0016  val mse 0.0092  (28s)
+[B] step  12000  train mse 0.0017  val mse 0.0051  (43s)
+[B] step  16000  train mse 0.0029  val mse 0.0073  (57s)
+[B] step  20000  train mse 0.0006  val mse 0.0065  (71s)
+[Aplus] datasets ['clean', 'clean_extra']: 4000 episodes, 442638 train rows, 23343 val rows
+[Aplus] step   4000  train mse 0.0010  val mse 0.0012  (14s)
+[Aplus] step   8000  train mse 0.0005  val mse 0.0005  (27s)
+[Aplus] step  12000  train mse 0.0002  val mse 0.0003  (41s)
+[Aplus] step  16000  train mse 0.0002  val mse 0.0002  (55s)
+[Aplus] step  20000  train mse 0.0001  val mse 0.0002  (69s)
+condition                     A           Aplus               B
+clean                     92.5%           92.0%          100.0%
+impulse                   29.0%           28.5%           98.5%
+slip                      23.0%           24.0%           99.5%
+target                    81.5%           83.5%          100.0%
+friction                  56.0%           52.5%           89.0%
+noise                      7.5%            7.5%           88.0%
+all perturbed             39.4%           39.2%           95.0%
+paired (same seed) B succeeds & A fails / A succeeds & B fails: {'clean': (15, 0), 'impulse': (139, 0), 'slip': (153, 0), 'target': (37, 0), 'friction': (66, 0), 'noise': (161, 0)}
+wrote results/seed2/results.json and results/seed2/success_rates.png in 69.2s

@@ -86,7 +86,9 @@ if __name__ == "__main__":
     p.add_argument("--models", default="models")
     p.add_argument("--workers", type=int, default=os.cpu_count())
     p.add_argument("--out", default="results")
+    p.add_argument("--conditions", nargs="+", default=CONDITIONS)
     args = p.parse_args()
+    CONDITIONS = args.conditions
     os.makedirs(args.out, exist_ok=True)
     seeds = list(range(EVAL_SEED0, EVAL_SEED0 + args.episodes))
     chunks = [seeds[i:i + 25] for i in range(0, len(seeds), 25)]
@@ -121,7 +123,8 @@ if __name__ == "__main__":
         json.dump({"meta": meta, "results": results, "paired_A_vs_B": paired,
                    "per_episode": {p_: {c: [per_ep[p_][c][s] for s in seeds] for c in CONDITIONS}
                                    for p_ in args.policies}}, f, indent=1)
-    plot(results, args.policies, os.path.join(args.out, "success_rates.png"))
+    if set(CONDITIONS) == set(["clean", "impulse", "slip", "target", "friction", "noise"]):
+        plot(results, args.policies, os.path.join(args.out, "success_rates.png"))
     hdr = f"{'condition':15s}" + "".join(f"{p_:>16s}" for p_ in args.policies)
     print(hdr)
     for c in CONDITIONS + ["all perturbed"]:
